@@ -11,12 +11,9 @@ int main() {
 	amAppInit();
 
 	u32 quantidadeDeTitulos, hours, minutes, seconds;
-	u64 idDosTitulosAchados[900] = {};
-	AM_GetTitleList(&quantidadeDeTitulos, MEDIATYPE_SD, 900, idDosTitulosAchados);
-
-	printf("\x1b[1;1HCriado por 0rientd");
-	printf("\x1b[6;1HTitulos encontrados: %lu\n", quantidadeDeTitulos);
-	printf("\x1b[200;28HAperte START para sair");
+	u64 idDosTitulosAchados[500] = {};
+	AM_GetTitleList(&quantidadeDeTitulos, MEDIATYPE_SD, 500, idDosTitulosAchados);
+	
 
 pegarJogoAleatorio:
 	u64 tituloAleatorio = 0;
@@ -29,7 +26,28 @@ pegarJogoAleatorio:
 		}
 	}
 
-	printf("\x1b[7;1HAperte Y para tentar um novo jogo.\n\n");
+	printf("\x1b[2;2HMade by \x1b[35;40m0rientd\x1b[0m");
+
+	printf("\x1b[7;15H+--------------------+");
+	printf("\x1b[8;15H|\x1b[8;36H|");
+	printf("\x1b[9;22HTitle ID");
+	printf("\x1b[9;15H|\x1b[9;36H|");
+	printf("\x1b[10;15H|\x1b[10;36H|");
+	printf("\x1b[11;15H|\x1b[11;36H|");
+	printf("\x1b[12;15H|\x1b[12;36H|");
+	printf("\x1b[13;15H+--------------------+");
+
+	printf("\x1b[19;3H+------------------+");
+	printf("\x1b[20;3H|      Press \x1b[31;40mY\x1b[0m     |");
+	printf("\x1b[21;3H|     to random    |");
+	printf("\x1b[22;3H+------------------+");
+
+	printf("\x1b[19;29H+------------------+");
+	printf("\x1b[20;29H|      Press \x1b[31;40mA\x1b[0m     |");
+	printf("\x1b[21;29H|      to load     |");
+	printf("\x1b[22;29H+------------------+");
+
+	printf("\x1b[29;16HPress \x1b[31;40mSTART\x1b[0m to exit");
 
 	while (aptMainLoop()) {
 		hidScanInput();
@@ -54,9 +72,9 @@ pegarJogoAleatorio:
 		minutes = timeStruct->tm_min;
 		seconds = timeStruct->tm_sec;
 
-		printf("\x1b[1;43H%02lu:%02lu:%02lu", hours, minutes, seconds);
+		printf("\x1b[2;42H%02lu:%02lu:%02lu", hours, minutes, seconds);
 
-		printf("\x1b[10;1HAperte A para carregar esse titulo:\n%016llx\n\n", tituloAleatorio);
+		printf("\x1b[32;40m\x1b[11;18H%016llx\x1b[0m", tituloAleatorio);
 
 		gfxFlushBuffers();
 		gfxSwapBuffers();
